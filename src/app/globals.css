@@ -122,3 +122,35 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(51, 65, 85, 0.8);
 }
+
+/* Nav Link Hover Underline Indicator */
+.nav-link-animated {
+  position: relative;
+}
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+.nav-link-animated:hover::after {
+  width: 80%;
+}
+
+@keyframes heart-pulse {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.25); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.15); }
+}
+
+.animate-heart-pulse {
+  animation: heart-pulse 1.2s ease-in-out infinite;
+}
+
