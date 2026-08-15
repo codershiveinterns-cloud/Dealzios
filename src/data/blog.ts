@@ -14,7 +14,7 @@ export const BLOG_POSTS: BlogPost[] = [
       role: 'Senior Shopping Analyst',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&auto=format'
     },
-    coverImage: 'https://images.unsplash.com/photo-1556742049-0a670fc8077a?w=800&h=400&fit=crop&auto=format',
+    coverImage: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80',
     content: `
       Shopping online should feel rewarding, yet nothing frustrates online buyers more than entering a promo code at checkout only to see the dreaded message: *"Invalid or expired code"*.
 
@@ -177,7 +177,7 @@ export const BLOG_POSTS: BlogPost[] = [
       role: 'Senior Shopping Analyst',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&auto=format'
     },
-    coverImage: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=800&h=400&fit=crop&auto=format',
+    coverImage: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=1200&q=80',
     content: `
       Black Friday and Cyber Monday are no longer single-day events; they span the entire month of November. However, not every advertised sale is a genuine bargain.
 
