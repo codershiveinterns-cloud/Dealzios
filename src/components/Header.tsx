@@ -165,37 +165,9 @@ export const Header: React.FC<HeaderProps> = ({
 
             </nav>
 
-            {/* Desktop Search Bar Trigger */}
-            <div className="hidden md:flex flex-1 max-w-md mx-2">
-              <button
-                onClick={onOpenSearch}
-                className="w-full bg-slate-100/80 hover:bg-white border border-slate-200/90 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-500/10 rounded-full px-3.5 py-1.5 text-sm text-slate-500 flex items-center justify-between group transition-all duration-300"
-                aria-label="Search stores, brands or coupon codes"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 transition-all duration-300 shrink-0">
-                    <Search className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-slate-500 group-hover:text-slate-900 text-xs sm:text-sm font-semibold transition-colors">Search stores, brands or promo codes...</span>
-                </div>
-                <kbd className="hidden sm:inline-flex items-center gap-0.5 bg-white text-slate-500 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-200 shadow-2xs group-hover:border-indigo-300 group-hover:text-indigo-600 transition-colors">
-                  <span className="text-xs">⌘</span>K
-                </kbd>
-              </button>
-            </div>
-
             {/* Action Buttons */}
             <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
               
-              {/* Mobile Search Button */}
-              <button
-                onClick={onOpenSearch}
-                className="md:hidden p-2.5 rounded-xl text-slate-700 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 active:scale-95 transition-all"
-                aria-label="Open Search"
-              >
-                <Search className="w-5 h-5 text-indigo-600" />
-              </button>
-
               {/* Saved Coupons Button with Heart Animation */}
               <button
                 onClick={onOpenSaved}
@@ -233,23 +205,9 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer with Staggered Scale Items */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-200/90 bg-white/95 backdrop-blur-lg px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenSearch();
-              }}
-              className="w-full bg-slate-100 border border-slate-200/90 rounded-2xl px-4 py-3 text-xs font-medium text-slate-600 flex items-center justify-between shadow-2xs active:scale-98 transition-all"
-            >
-              <div className="flex items-center gap-2.5">
-                <Search className="w-4 h-4 text-indigo-600" />
-                <span className="font-semibold text-slate-800">Search stores, brands or promo codes...</span>
-              </div>
-              <span className="bg-indigo-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg shadow-2xs">SEARCH</span>
-            </button>
-
             <div className="grid grid-cols-2 gap-2 pt-2 text-sm font-bold text-slate-800">
               <Link 
                 href="/coupons" 
