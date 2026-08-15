@@ -312,8 +312,8 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                         </div>
                       </div>
                     </div>
-                    <button className="shrink-0 text-xs font-extrabold text-emerald-600 bg-emerald-50 group-hover:bg-emerald-600 group-hover:text-white px-3.5 py-2 rounded-xl transition-all shadow-xs">
-                      Claim Deal
+                    <button className="shrink-0 text-xs font-extrabold text-indigo-600 bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white px-3.5 py-2 rounded-xl transition-all shadow-xs">
+                      Get Code
                     </button>
                   </div>
                 ))}

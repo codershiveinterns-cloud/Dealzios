@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Offer } from '@/data/types';
-import { ShieldCheck, Clock, Copy, ExternalLink, Heart, Tag, Percent, Sparkles } from 'lucide-react';
+import { ShieldCheck, Clock, Copy, Heart, Tag } from 'lucide-react';
 
 interface CouponCardProps {
   coupon: Offer;
@@ -18,7 +18,17 @@ export const CouponCard: React.FC<CouponCardProps> = ({
   isSaved = false,
   onToggleSave
 }) => {
-  const isCoupon = coupon.type === 'coupon';
+  const handleAction = () => {
+    onSelect(coupon);
+    if (coupon.code) {
+      try {
+        navigator.clipboard.writeText(coupon.code);
+      } catch (e) {}
+    }
+    if (coupon.affiliateUrl || coupon.merchantUrl) {
+      window.open(coupon.affiliateUrl || coupon.merchantUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 p-5 flex flex-col justify-between relative group hover:border-indigo-300">
@@ -42,15 +52,9 @@ export const CouponCard: React.FC<CouponCardProps> = ({
                 {coupon.storeName}
               </span>
               <div className="flex items-center gap-1.5 text-[11px] text-slate-500 mt-0.5">
-                {isCoupon ? (
-                  <span className="inline-flex items-center gap-1 font-semibold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">
-                    <Tag className="w-3 h-3 text-indigo-500" /> Code
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">
-                    <Percent className="w-3 h-3 text-emerald-600" /> Deal
-                  </span>
-                )}
+                <span className="inline-flex items-center gap-1 font-semibold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">
+                  <Tag className="w-3 h-3 text-indigo-500" /> Coupon Code
+                </span>
                 {coupon.verified && (
                   <span className="inline-flex items-center gap-0.5 text-emerald-600 font-medium">
                     <ShieldCheck className="w-3 h-3 text-emerald-500" /> Verified
@@ -84,7 +88,7 @@ export const CouponCard: React.FC<CouponCardProps> = ({
             </span>
           </div>
           <h4 
-            onClick={() => onSelect(coupon)}
+            onClick={handleAction}
             className="font-bold text-slate-900 text-sm sm:text-base leading-snug cursor-pointer hover:text-indigo-600 transition-colors line-clamp-2"
           >
             {coupon.title}
@@ -102,23 +106,13 @@ export const CouponCard: React.FC<CouponCardProps> = ({
           <span>Exp: {coupon.expirationDate}</span>
         </div>
 
-        {isCoupon ? (
-          <button
-            onClick={() => onSelect(coupon)}
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md shadow-indigo-600/20 flex items-center gap-1.5 transition-all group/btn hover:scale-105 active:scale-95 shimmer-effect"
-          >
-            <Copy className="w-3.5 h-3.5 group-hover/btn:rotate-12 transition-transform" />
-            <span>Show Code</span>
-          </button>
-        ) : (
-          <button
-            onClick={() => onSelect(coupon)}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md shadow-emerald-600/20 flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95"
-          >
-            <span>Get Deal</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </button>
-        )}
+        <button
+          onClick={handleAction}
+          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-extrabold rounded-xl shadow-md shadow-indigo-600/20 flex items-center gap-1.5 transition-all group/btn hover:scale-105 active:scale-95 shimmer-effect"
+        >
+          <Copy className="w-3.5 h-3.5 group-hover/btn:rotate-12 transition-transform" />
+          <span>Show Code</span>
+        </button>
       </div>
     </div>
   );

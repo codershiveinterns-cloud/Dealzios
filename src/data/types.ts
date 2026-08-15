@@ -1,5 +1,5 @@
 export type OfferType = 'coupon' | 'deal';
-export type DiscountType = 'percent' | 'fixed' | 'shipping' | 'deal';
+export type DiscountType = 'percent' | 'fixed' | 'shipping' | 'deal' | 'coupon';
 
 export interface Store {
   id: string;

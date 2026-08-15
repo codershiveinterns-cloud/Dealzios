@@ -57,10 +57,10 @@ export const Header: React.FC<HeaderProps> = ({
         </span>
         <span className="hidden sm:inline text-slate-300">Save up to 75% on laptops, software, and student apparel today!</span>
         <Link 
-          href="/deals" 
+          href="/coupons" 
           className="inline-flex items-center gap-1 underline hover:text-white transition-colors ml-1 font-bold text-white group"
         >
-          <span>Explore Deals</span>
+          <span>Get Coupon Codes</span>
           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

@@ -241,7 +241,7 @@ export default function HomePage() {
                     type="submit"
                     className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 active:scale-95 text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-2xl shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 shrink-0 flex items-center gap-2"
                   >
-                    <span>Find Deals</span>
+                    <span>Find Coupon Codes</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
