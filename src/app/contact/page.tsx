@@ -51,7 +51,7 @@ export default function ContactPage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight">
-            Get in Touch with SafeVerdicts
+            Get in Touch with Dealzios
           </h1>
           <p className="text-slate-500 text-sm sm:text-base mt-3 leading-relaxed">
             Have questions about a coupon code, advertisement inquiries, or deal adjustments? Fill out the form below.
@@ -92,9 +92,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-bold text-slate-900 text-sm sm:text-base">Corporate Headquarters</h3>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                    1/F Hathikhera, Hathikhera Talai<br />
-                    Ajmer, Rajasthan<br />
-                    India, 305001
+                    100 Innovation Way, Suite 400<br />
+                    San Francisco, CA 94107<br />
+                    United States
                   </p>
                 </div>
               </div>
