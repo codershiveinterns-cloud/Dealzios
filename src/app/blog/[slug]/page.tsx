@@ -103,6 +103,37 @@ export default function BlogArticlePage({ params }: BlogArticlePageProps) {
           </div>
 
         </article>
+
+        {/* Related Articles Section */}
+        <div className="pt-8 space-y-6">
+          <h3 className="text-xl font-black text-slate-950 tracking-tight">More Savings Guides</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {BLOG_POSTS.filter(p => p.id !== post.id).slice(0, 2).map(relPost => (
+              <Link
+                key={relPost.id}
+                href={`/blog/${relPost.slug}`}
+                className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all flex items-center gap-4 group"
+              >
+                {relPost.coverImage && (
+                  <img
+                    src={relPost.coverImage}
+                    alt={relPost.title}
+                    className="w-20 h-20 rounded-xl object-cover shrink-0 border border-slate-200 group-hover:scale-105 transition-transform"
+                  />
+                )}
+                <div className="min-w-0">
+                  <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-md">
+                    {relPost.category}
+                  </span>
+                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm line-clamp-2 mt-1 group-hover:text-indigo-600 transition-colors">
+                    {relPost.title}
+                  </h4>
+                  <div className="text-[11px] text-slate-400 mt-1">{relPost.readTime}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </main>
 
       <Footer onOpenSubmit={() => setIsSubmitOpen(true)} />

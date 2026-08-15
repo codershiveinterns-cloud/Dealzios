@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { BookOpen, Clock, ArrowRight } from 'lucide-react';
+import { BookOpen, Clock, ArrowRight, Sparkles, User, Tag } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { QuickSearchModal } from '@/components/QuickSearchModal';
@@ -15,21 +15,29 @@ import { Offer } from '@/data/types';
 
 export default function BlogIndexPage() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [isSavedOpen, setIsSavedOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Offer | null>(null);
   const [savedIds, setSavedIds] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('vv_saved_coupons');
+      const stored = localStorage.getItem('dealzios_saved_coupons');
       if (stored) setSavedIds(JSON.parse(stored));
     } catch (e) {}
   }, []);
 
+  const categories = ['All', 'Coupon Guide', 'Student Savings', 'Smart Shopping', 'SaaS & Tech', 'Shopping Hacks', 'Holiday Deals'];
+
+  const filteredPosts = selectedCategory === 'All'
+    ? BLOG_POSTS
+    : BLOG_POSTS.filter(p => p.category === selectedCategory);
+
+  const featuredPost = BLOG_POSTS[0];
+
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans">
       <Header
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenSubmit={() => setIsSubmitOpen(true)}
@@ -37,48 +45,129 @@ export default function BlogIndexPage() {
         savedCount={savedIds.length}
       />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div className="bg-white rounded-3xl border border-slate-200/90 p-8 shadow-xs mb-8 space-y-4">
-          <div className="flex items-center gap-2 text-indigo-600 font-extrabold text-xs uppercase tracking-wider">
-            <BookOpen className="w-4 h-4" /> Smart Shopping Guides
+      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-8">
+        
+        {/* Header Banner */}
+        <div className="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-sm space-y-4 relative overflow-hidden">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-600 font-extrabold text-xs uppercase tracking-wider rounded-full">
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>SAVINGS BLOG & GUIDES</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            Money-Saving Tips & Coupon Guides
+
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-tight">
+            Money-Saving Strategies & Shopping Guides
           </h1>
-          <p className="text-sm text-slate-500 max-w-2xl">
-            Expert strategies on finding valid promotional codes, avoiding expired vouchers, and maximizing online savings.
+          <p className="text-sm sm:text-base text-slate-500 max-w-2xl leading-relaxed">
+            Expert articles on finding valid promotional codes, avoiding expired vouchers, unlocking student discounts, and maximizing online savings.
           </p>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-2 pt-4 overflow-x-auto scrollbar-none">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                  selectedCategory === cat
+                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {BLOG_POSTS.map(post => (
+        {/* Featured Hero Article (When Category is All) */}
+        {selectedCategory === 'All' && featuredPost && (
+          <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden group hover:border-indigo-300 transition-all duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+              <div className="lg:col-span-7 h-64 sm:h-80 lg:h-full overflow-hidden bg-slate-100 relative">
+                <img
+                  src={featuredPost.coverImage}
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" /> Featured Guide
+                </div>
+              </div>
+              <div className="lg:col-span-5 p-8 sm:p-10 space-y-4">
+                <div className="flex items-center justify-between text-xs text-slate-400">
+                  <span className="bg-indigo-50 text-indigo-600 font-extrabold px-3 py-1 rounded-full">
+                    {featuredPost.category}
+                  </span>
+                  <span className="flex items-center gap-1 font-medium">
+                    <Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}
+                  </span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-black text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors">
+                  {featuredPost.title}
+                </h2>
+
+                <p className="text-xs sm:text-sm text-slate-500 line-clamp-3 leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
+
+                <div className="pt-4 flex items-center justify-between border-t border-slate-100">
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src={featuredPost.author.avatar}
+                      alt={featuredPost.author.name}
+                      className="w-8 h-8 rounded-full object-cover border border-slate-200"
+                    />
+                    <div>
+                      <div className="text-xs font-bold text-slate-900">{featuredPost.author.name}</div>
+                      <div className="text-[10px] text-slate-400">{featuredPost.publishedAt}</div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href={`/blog/${featuredPost.slug}`}
+                    className="inline-flex items-center gap-1 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 transition-colors group-hover:translate-x-1 duration-200"
+                  >
+                    <span>Read Guide</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 6 Blog Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPosts.map(post => (
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
-              className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all flex flex-col justify-between overflow-hidden group"
+              className="bg-white rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-xl hover:border-indigo-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
             >
               <div>
                 {post.coverImage && (
-                  <div className="h-44 w-full overflow-hidden bg-slate-100">
+                  <div className="h-52 w-full overflow-hidden bg-slate-100 relative">
                     <img
                       src={post.coverImage}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
+                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-indigo-600 font-extrabold text-[11px] px-2.5 py-1 rounded-lg border border-slate-200/80 shadow-2xs">
+                      {post.category}
+                    </div>
                   </div>
                 )}
 
                 <div className="p-6 space-y-3">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="bg-indigo-50 text-indigo-600 font-bold px-2.5 py-0.5 rounded-full">
-                      {post.category}
+                  <div className="flex items-center justify-between text-[11px] text-slate-400">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Clock className="w-3.5 h-3.5 text-indigo-500" /> {post.readTime}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {post.readTime}
-                    </span>
+                    <span>{post.publishedAt}</span>
                   </div>
 
-                  <h3 className="font-extrabold text-lg text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug">
+                  <h3 className="font-extrabold text-lg text-slate-950 group-hover:text-indigo-600 transition-colors leading-snug">
                     {post.title}
                   </h3>
 
@@ -88,15 +177,25 @@ export default function BlogIndexPage() {
                 </div>
               </div>
 
-              <div className="p-6 pt-0 flex items-center justify-between text-xs border-t border-slate-100 mt-4">
-                <span className="text-slate-400 font-medium">{post.publishedAt}</span>
-                <span className="text-indigo-600 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                  Read Article <ArrowRight className="w-3.5 h-3.5" />
+              <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    className="w-7 h-7 rounded-full object-cover border border-slate-200"
+                  />
+                  <span className="text-xs font-bold text-slate-800">{post.author.name}</span>
+                </div>
+
+                <span className="text-xs font-extrabold text-indigo-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  <span>Read Article</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
             </Link>
           ))}
         </div>
+
       </main>
 
       <Footer onOpenSubmit={() => setIsSubmitOpen(true)} />

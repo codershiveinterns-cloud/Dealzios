@@ -15,7 +15,8 @@ import {
   X,
   Sparkles,
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  BookOpen
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -140,6 +141,15 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-slate-900 font-bold group-hover:text-emerald-700">Trending</span>
               </Link>
 
+              {/* Blog Link */}
+              <Link 
+                href="/blog" 
+                className="nav-link-animated px-3 py-1.5 rounded-xl hover:bg-indigo-50/80 hover:text-indigo-600 transition-all duration-200 flex items-center gap-1.5 group font-semibold text-slate-700"
+              >
+                <BookOpen className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:scale-110 transition-all duration-200" />
+                <span>Blog</span>
+              </Link>
+
               {/* Affiliate Disclosure with Hover Popover Entrance Animation */}
               <div className="relative group px-1 py-1">
                 <Link 
@@ -228,6 +238,14 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <StoreIcon className="w-4 h-4 text-indigo-600" />
                 <span>Stores</span>
+              </Link>
+              <Link 
+                href="/blog" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 active:scale-95 transition-all"
+              >
+                <BookOpen className="w-4 h-4 text-indigo-600" />
+                <span>Blog</span>
               </Link>
               <Link 
                 href="/affiliate-disclosure" 
