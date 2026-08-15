@@ -117,6 +117,24 @@ export const Header: React.FC<HeaderProps> = ({
                 <TrendingUp className="w-4 h-4 text-emerald-500" />
                 <span className="text-slate-900 font-semibold">Trending</span>
               </Link>
+
+              {/* Affiliate Disclosure with Hover Popover */}
+              <div className="relative group py-1">
+                <Link 
+                  href="/affiliate-disclosure"
+                  className="flex items-center gap-1 hover:text-indigo-600 transition-colors font-medium"
+                >
+                  <span>Affiliate Disclosure</span>
+                </Link>
+                
+                {/* Popover Preview Box on Hover */}
+                <div className="absolute top-full right-1/2 translate-x-1/2 mt-2 w-72 p-4 bg-white rounded-2xl border border-slate-200/90 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-200 rotate-45"></div>
+                  <p className="text-xs text-slate-600 leading-relaxed relative z-10">
+                    Some links on this site are affiliate links. We may earn a commission at no extra cost to you. Our content remains independent and research-based.
+                  </p>
+                </div>
+              </div>
             </nav>
 
             {/* Desktop Search Bar Trigger */}
@@ -228,12 +246,20 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>Stores</span>
               </Link>
               <Link 
-                href="/#categories" 
+                href="/affiliate-disclosure" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
               >
-                <Grid className="w-4 h-4 text-indigo-600" />
-                <span>Categories</span>
+                <Sparkles className="w-4 h-4 text-indigo-600" />
+                <span>Affiliate Disclosure</span>
+              </Link>
+              <Link 
+                href="/contact" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+              >
+                <Tag className="w-4 h-4 text-indigo-600" />
+                <span>Contact Us</span>
               </Link>
             </div>
 

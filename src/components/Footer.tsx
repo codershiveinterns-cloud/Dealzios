@@ -122,6 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenSubmit }) => {
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">Company & Legal</h4>
             <ul className="space-y-2 text-xs">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
               <li>
                 <button onClick={onOpenSubmit} className="hover:text-white transition-colors text-left">
                   Submit a Coupon
