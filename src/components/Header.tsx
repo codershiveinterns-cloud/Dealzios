@@ -141,15 +141,17 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="hidden md:flex flex-1 max-w-md mx-2">
               <button
                 onClick={onOpenSearch}
-                className="w-full bg-slate-100/80 hover:bg-slate-100 border border-slate-200/90 rounded-full px-4 py-2 text-sm text-slate-400 flex items-center justify-between group transition-all"
+                className="w-full bg-slate-100/70 hover:bg-white border border-slate-200/90 hover:border-indigo-300 hover:shadow-md hover:shadow-indigo-500/5 rounded-full px-3.5 py-1.5 text-sm text-slate-500 flex items-center justify-between group transition-all duration-200"
                 aria-label="Search stores, brands or coupon codes"
               >
                 <div className="flex items-center gap-2.5">
-                  <Search className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 transition-colors" />
-                  <span className="text-slate-500 text-xs sm:text-sm">Search stores, brands or promo codes...</span>
+                  <div className="w-7 h-7 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-200 shrink-0">
+                    <Search className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="text-slate-500 group-hover:text-slate-800 text-xs sm:text-sm font-medium">Search stores, brands or promo codes...</span>
                 </div>
-                <kbd className="hidden sm:inline-block bg-white text-slate-400 text-[10px] font-semibold px-2 py-0.5 rounded border border-slate-200 shadow-2xs">
-                  ⌘K
+                <kbd className="hidden sm:inline-flex items-center gap-0.5 bg-white text-slate-500 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-200 shadow-2xs group-hover:border-indigo-300 group-hover:text-indigo-600 transition-colors">
+                  <span className="text-xs">⌘</span>K
                 </kbd>
               </button>
             </div>

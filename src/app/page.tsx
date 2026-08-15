@@ -214,24 +214,79 @@ export default function HomePage() {
               Discover verified promo codes, exclusive deals, and discounts from thousands of popular stores.
             </p>
 
-            {/* Large Search Box with Animated Ring */}
-            <div className="mt-8 max-w-2xl mx-auto">
-              <form onSubmit={handleHeroSearch} className="relative flex items-center bg-white rounded-2xl p-2 shadow-2xl border-2 border-slate-200/90 group focus-within:border-indigo-600 focus-within:ring-4 focus-within:ring-indigo-100 transition-all hover:border-indigo-300">
-                <Search className="w-5 h-5 text-slate-400 ml-3.5 shrink-0 group-focus-within:text-indigo-600 transition-colors" />
-                <input
-                  type="text"
-                  value={heroQuery}
-                  onChange={(e) => setHeroQuery(e.target.value)}
-                  placeholder="Search for a store or brand (e.g. Nike, Amazon, Canva)..."
-                  className="w-full px-3 py-2 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 bg-transparent outline-none font-medium"
-                />
-                <button
-                  type="submit"
-                  className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 shrink-0 shimmer-effect"
-                >
-                  Find Deals
-                </button>
-              </form>
+            {/* Large Search Box with Glowing Gradient Ring */}
+            <div className="mt-8 max-w-2xl mx-auto relative">
+              <div className="p-1 rounded-3xl bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-600 shadow-2xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/35">
+                <form onSubmit={handleHeroSearch} className="relative flex items-center bg-white rounded-[22px] p-2 shadow-inner group">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center ml-1 shrink-0 font-bold group-focus-within:bg-indigo-600 group-focus-within:text-white transition-all duration-200">
+                    <Search className="w-5 h-5" />
+                  </div>
+                  <input
+                    type="text"
+                    value={heroQuery}
+                    onChange={(e) => setHeroQuery(e.target.value)}
+                    placeholder="Search stores, brands or promo codes (e.g. Nike, Canva, NordVPN)..."
+                    className="w-full px-3.5 py-2.5 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 bg-transparent outline-none font-semibold"
+                  />
+                  {heroQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setHeroQuery('')}
+                      className="p-1 text-slate-400 hover:text-slate-600 mr-2 text-xs font-bold"
+                    >
+                      Clear
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 active:scale-95 text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-2xl shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 shrink-0 flex items-center gap-2"
+                  >
+                    <span>Find Deals</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
+              </div>
+
+              {/* Hero Instant Auto-Suggestion Dropdown */}
+              {heroQuery.trim().length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-3xl border border-slate-200 shadow-2xl p-4 z-40 text-left space-y-3 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider px-2">
+                    Matching Stores & Offers
+                  </div>
+                  <div className="space-y-1.5 max-h-60 overflow-y-auto">
+                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase())).slice(0, 4).map(store => (
+                      <Link
+                        key={store.id}
+                        href={`/store/${store.slug}`}
+                        className="flex items-center justify-between p-2.5 rounded-2xl hover:bg-indigo-50/60 transition-colors group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <img src={store.logo} alt={store.name} className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
+                          <div>
+                            <div className="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-indigo-600">{store.name}</div>
+                            <div className="text-[11px] text-slate-500">{store.offerCount} Offers</div>
+                          </div>
+                        </div>
+                        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
+                          {store.bestDiscount}
+                        </span>
+                      </Link>
+                    ))}
+                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase())).length === 0 && (
+                      <div className="p-3 text-xs text-slate-500 text-center">
+                        Press Enter to view all results for "{heroQuery}"
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleHeroSearch}
+                    className="w-full pt-2 border-t border-slate-100 text-center text-xs font-bold text-indigo-600 hover:underline flex items-center justify-center gap-1"
+                  >
+                    <span>View all results for "{heroQuery}"</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Popular Quick Searches */}
@@ -243,7 +298,7 @@ export default function HomePage() {
                 <Link
                   key={brand}
                   href={`/store/${brand.toLowerCase().replace(/[^a-z0-9]/g, '')}`}
-                  className="bg-white hover:bg-indigo-600 text-slate-700 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-200 shadow-2xs transition-all font-medium hover:scale-105 hover:shadow-indigo-500/20"
+                  className="bg-white hover:bg-indigo-600 text-slate-700 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-200/90 shadow-2xs transition-all font-semibold hover:scale-105 hover:shadow-md hover:shadow-indigo-500/10"
                 >
                   {brand}
                 </Link>

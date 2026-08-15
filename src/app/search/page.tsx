@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Search, Store as StoreIcon, Tag, Percent, ArrowRight } from 'lucide-react';
 import { Header } from '@/components/Header';
@@ -20,8 +20,14 @@ import { CATEGORIES } from '@/data/categories';
 import { Offer } from '@/data/types';
 
 function SearchResultsContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
+  const [searchInput, setSearchInput] = useState(query);
+
+  useEffect(() => {
+    setSearchInput(query);
+  }, [query]);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -29,6 +35,13 @@ function SearchResultsContent() {
   const [isSavedOpen, setIsSavedOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Offer | null>(null);
   const [savedIds, setSavedIds] = useState<string[]>([]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchInput.trim())}`);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -68,7 +81,7 @@ function SearchResultsContent() {
   const totalResults = matchedStores.length + matchedCoupons.length + matchedDeals.length + matchedCategories.length;
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans">
       <Header
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenSubmit={() => setIsSubmitOpen(true)}
@@ -78,17 +91,39 @@ function SearchResultsContent() {
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-        {/* Search Header Banner */}
-        <div className="bg-white rounded-3xl border border-slate-200/90 p-8 shadow-xs mb-8 space-y-2">
-          <div className="flex items-center gap-2 text-indigo-600 font-extrabold text-xs uppercase tracking-wider">
-            <Search className="w-4 h-4" /> Search Discovery
+        {/* Search Header Banner with Refined Search Box */}
+        <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-10 shadow-sm mb-8 space-y-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-indigo-600 font-extrabold text-xs uppercase tracking-wider">
+                <Search className="w-4 h-4" /> Search Discovery
+              </div>
+              <h1 className="text-3xl font-black text-slate-950">
+                Search Results for "{query}"
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-500">
+                Found {totalResults} matching stores, coupon codes, and deals.
+              </p>
+            </div>
+
+            {/* Refine Search Box */}
+            <form onSubmit={handleSearchSubmit} className="w-full md:w-auto min-w-[320px] relative flex items-center bg-slate-50 border border-slate-200 rounded-2xl p-1.5 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 transition-all">
+              <Search className="w-4 h-4 text-indigo-600 ml-3 mr-2 shrink-0" />
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Refine your search..."
+                className="w-full bg-transparent text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 outline-none font-semibold py-1.5"
+              />
+              <button
+                type="submit"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors shrink-0 shadow-xs"
+              >
+                Search
+              </button>
+            </form>
           </div>
-          <h1 className="text-3xl font-black text-slate-950">
-            Search Results for "{query}"
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Found {totalResults} matching stores, coupon codes, and deals.
-          </p>
         </div>
 
         {totalResults === 0 ? (
