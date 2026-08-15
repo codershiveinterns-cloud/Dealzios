@@ -151,12 +151,8 @@ export const Header: React.FC<HeaderProps> = ({
                 </Link>
                 
                 {/* Popover Preview Box on Hover with Scale & Fade */}
-                <div className="absolute top-full right-1/2 translate-x-1/2 mt-2.5 w-80 p-4 bg-white rounded-2xl border border-slate-200/90 shadow-2xl transition-all duration-300 transform origin-top group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 translate-y-2 opacity-0 invisible scale-95 group-hover:scale-100 z-50 pointer-events-none group-hover:pointer-events-auto">
+                <div className="absolute top-full right-1/2 translate-x-1/2 mt-2.5 w-72 p-4 bg-white rounded-2xl border border-slate-200/90 shadow-2xl transition-all duration-300 transform origin-top group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 translate-y-2 opacity-0 invisible scale-95 group-hover:scale-100 z-50 pointer-events-none group-hover:pointer-events-auto">
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white border-t border-l border-slate-200 rotate-45"></div>
-                  <div className="flex items-center gap-1.5 text-indigo-600 font-bold text-[11px] uppercase tracking-wider mb-1.5 relative z-10">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>Verified Transparency</span>
-                  </div>
                   <p className="text-xs text-slate-600 leading-relaxed relative z-10 font-normal">
                     Some links on this site are affiliate links. We may earn a commission at no extra cost to you. Our content remains independent and research-based.
                   </p>
