@@ -20,14 +20,6 @@ export const CouponCard: React.FC<CouponCardProps> = ({
 }) => {
   const handleAction = () => {
     onSelect(coupon);
-    if (coupon.code) {
-      try {
-        navigator.clipboard.writeText(coupon.code);
-      } catch (e) {}
-    }
-    if (coupon.affiliateUrl || coupon.merchantUrl) {
-      window.open(coupon.affiliateUrl || coupon.merchantUrl, '_blank', 'noopener,noreferrer');
-    }
   };
 
   return (
