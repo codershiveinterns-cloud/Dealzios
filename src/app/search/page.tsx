@@ -60,38 +60,64 @@ function SearchResultsContent() {
   };
 
   const cleanQ = query.trim().toLowerCase();
+  const alphaQ = cleanQ.replace(/[^a-z0-9]/g, '');
 
   // Helper matching function for offers (Coupons & Deals)
-  const matchesOffer = (offer: Offer, term: string) => {
-    if (!term) return false;
+  const matchesOffer = (offer: Offer) => {
+    if (!cleanQ) return false;
+    const storeNameClean = offer.storeName.toLowerCase();
+    const storeSlugClean = offer.storeSlug.toLowerCase();
+    const titleClean = offer.title.toLowerCase();
+    const descClean = offer.description.toLowerCase();
+    const catClean = offer.category.toLowerCase();
+    const codeClean = offer.code ? offer.code.toLowerCase() : '';
+    const discountClean = offer.discount ? offer.discount.toLowerCase() : '';
+
+    const alphaStoreName = storeNameClean.replace(/[^a-z0-9]/g, '');
+    const alphaStoreSlug = storeSlugClean.replace(/[^a-z0-9]/g, '');
+    const alphaCode = codeClean.replace(/[^a-z0-9]/g, '');
+
     return (
-      offer.storeName.toLowerCase().includes(term) ||
-      offer.storeSlug.toLowerCase().includes(term) ||
-      offer.title.toLowerCase().includes(term) ||
-      offer.description.toLowerCase().includes(term) ||
-      offer.category.toLowerCase().includes(term) ||
-      offer.categorySlug.toLowerCase().includes(term) ||
-      (offer.code ? offer.code.toLowerCase().includes(term) : false) ||
-      (offer.discount ? offer.discount.toLowerCase().includes(term) : false)
+      storeNameClean.includes(cleanQ) ||
+      storeSlugClean.includes(cleanQ) ||
+      titleClean.includes(cleanQ) ||
+      descClean.includes(cleanQ) ||
+      catClean.includes(cleanQ) ||
+      codeClean.includes(cleanQ) ||
+      discountClean.includes(cleanQ) ||
+      (alphaQ.length > 1 && (
+        alphaStoreName.includes(alphaQ) ||
+        alphaStoreSlug.includes(alphaQ) ||
+        alphaCode.includes(alphaQ)
+      ))
     );
   };
 
   const matchedCoupons = cleanQ
-    ? COUPONS.filter(c => matchesOffer(c, cleanQ))
+    ? COUPONS.filter(matchesOffer)
     : [];
 
   const matchedDeals = cleanQ
-    ? DEALS.filter(d => matchesOffer(d, cleanQ))
+    ? DEALS.filter(matchesOffer)
     : [];
 
   const matchedStores = cleanQ
-    ? STORES.filter(s => 
-        s.name.toLowerCase().includes(cleanQ) || 
-        s.slug.toLowerCase().includes(cleanQ) || 
-        s.category.toLowerCase().includes(cleanQ) ||
-        matchedCoupons.some(c => c.storeId === s.id) ||
-        matchedDeals.some(d => d.storeId === s.id)
-      )
+    ? STORES.filter(s => {
+        const sName = s.name.toLowerCase();
+        const sSlug = s.slug.toLowerCase();
+        const sCat = s.category.toLowerCase();
+        const alphaSName = sName.replace(/[^a-z0-9]/g, '');
+        const alphaSSlug = sSlug.replace(/[^a-z0-9]/g, '');
+
+        return (
+          sName.includes(cleanQ) ||
+          sSlug.includes(cleanQ) ||
+          sCat.includes(cleanQ) ||
+          (alphaQ.length > 1 && (alphaSName.includes(alphaQ) || alphaSSlug.includes(alphaQ))) ||
+          matchedCoupons.some(c => c.storeId === s.id || c.storeSlug === s.slug) ||
+          matchedDeals.some(d => d.storeId === s.id || d.storeSlug === s.slug)
+        );
+      })
     : [];
 
   const matchedCategories = cleanQ

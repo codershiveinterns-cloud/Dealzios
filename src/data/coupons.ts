@@ -1,6 +1,7 @@
 import { Offer } from './types';
 
 export const COUPONS: Offer[] = [
+  // 1. Nike
   {
     id: 'coup-nike-01',
     storeId: 'store-nike',
@@ -58,6 +59,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-05',
     updatedAt: '2026-08-14'
   },
+
+  // 2. Amazon
   {
     id: 'coup-amazon-01',
     storeId: 'store-amazon',
@@ -87,6 +90,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
+
+  // 3. Canva
   {
     id: 'coup-canva-01',
     storeId: 'store-canva',
@@ -116,6 +121,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-02',
     updatedAt: '2026-08-15'
   },
+
+  // 4. Adobe
   {
     id: 'coup-adobe-01',
     storeId: 'store-adobe',
@@ -144,6 +151,38 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-03',
     updatedAt: '2026-08-13'
   },
+
+  // 5. Walmart
+  {
+    id: 'coup-walmart-01',
+    storeId: 'store-walmart',
+    storeName: 'Walmart',
+    storeSlug: 'walmart',
+    storeLogo: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=150&h=150&fit=crop&auto=format',
+    title: '$10 Off Orders over $50 with Grocery Pickup',
+    description: 'Save $10 on your first Walmart online grocery pickup or delivery order.',
+    code: 'TRIPLE10',
+    discount: '$10 OFF',
+    discountType: 'fixed',
+    type: 'coupon',
+    category: 'Department Stores & Retail',
+    categorySlug: 'shopping',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-10',
+    terms: 'Valid on first 3 orders for new pickup customers.',
+    affiliateUrl: 'https://walmart.com?aff=dealzios&code=TRIPLE10',
+    merchantUrl: 'https://walmart.com',
+    clickCount: 2450,
+    upvotes: 680,
+    downvotes: 12,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-01',
+    updatedAt: '2026-08-16'
+  },
+
+  // 6. NordVPN
   {
     id: 'coup-nordvpn-01',
     storeId: 'store-nordvpn',
@@ -173,6 +212,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
+
+  // 7. Booking.com
   {
     id: 'coup-booking-01',
     storeId: 'store-booking',
@@ -201,6 +242,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-04',
     updatedAt: '2026-08-14'
   },
+
+  // 8. Uber
   {
     id: 'coup-uber-01',
     storeId: 'store-uber',
@@ -230,90 +273,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
-  {
-    id: 'coup-sephora-01',
-    storeId: 'store-sephora',
-    storeName: 'Sephora',
-    storeSlug: 'sephora',
-    storeLogo: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&h=150&fit=crop&auto=format',
-    title: 'Free 8-Piece Luxury Beauty Trial Set with $45 Order',
-    description: 'Receive a complimentary sample bag filled with mini luxury skincare and fragrance favorites.',
-    code: 'LUXEBAG',
-    discount: 'FREE GIFT',
-    discountType: 'fixed',
-    type: 'coupon',
-    category: 'Beauty & Skincare',
-    categorySlug: 'beauty',
-    verified: true,
-    verifiedDate: 'Today',
-    expirationDate: '2026-08-28',
-    terms: 'Beauty Insider membership required. Minimum spend $45.',
-    affiliateUrl: 'https://sephora.com?aff=dealzios&code=LUXEBAG',
-    merchantUrl: 'https://sephora.com',
-    clickCount: 1540,
-    upvotes: 430,
-    downvotes: 11,
-    featured: true,
-    trending: false,
-    createdAt: '2026-08-07',
-    updatedAt: '2026-08-15'
-  },
-  {
-    id: 'coup-hostinger-01',
-    storeId: 'store-hostinger',
-    storeName: 'Hostinger',
-    storeSlug: 'hostinger',
-    storeLogo: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=150&h=150&fit=crop&auto=format',
-    title: 'Extra 10% Off Premium Web Hosting Plans',
-    description: 'Get an additional 10% off already discounted hosting packages + free domain name.',
-    code: 'HOSTING10PRO',
-    discount: '10% EXTRA',
-    discountType: 'percent',
-    type: 'coupon',
-    category: 'Software & SaaS',
-    categorySlug: 'software',
-    verified: true,
-    verifiedDate: '3 days ago',
-    expirationDate: '2026-10-01',
-    terms: 'Valid on 12, 24, and 48-month billing cycles.',
-    affiliateUrl: 'https://hostinger.com?aff=dealzios&code=HOSTING10PRO',
-    merchantUrl: 'https://hostinger.com',
-    clickCount: 940,
-    upvotes: 280,
-    downvotes: 6,
-    featured: true,
-    trending: false,
-    createdAt: '2026-08-03',
-    updatedAt: '2026-08-12'
-  },
-  {
-    id: 'coup-adidas-01',
-    storeId: 'store-adidas',
-    storeName: 'Adidas',
-    storeSlug: 'adidas',
-    storeLogo: 'https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=150&h=150&fit=crop&auto=format',
-    title: '30% Off Ultraboost & Originals Collection',
-    description: 'Save 30% on iconic Adidas footwear and tracksuit apparel.',
-    code: 'ADI30SUMMER',
-    discount: '30% OFF',
-    discountType: 'percent',
-    type: 'coupon',
-    category: 'Fashion & Apparel',
-    categorySlug: 'fashion',
-    verified: true,
-    verifiedDate: 'Today',
-    expirationDate: '2026-08-31',
-    terms: 'adiClub membership required for coupon redemption.',
-    affiliateUrl: 'https://adidas.com?aff=dealzios&code=ADI30SUMMER',
-    merchantUrl: 'https://adidas.com',
-    clickCount: 1680,
-    upvotes: 490,
-    downvotes: 14,
-    featured: true,
-    trending: true,
-    createdAt: '2026-08-01',
-    updatedAt: '2026-08-15'
-  },
+
+  // 9. Target
   {
     id: 'coup-target-01',
     storeId: 'store-target',
@@ -370,34 +331,38 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-05',
     updatedAt: '2026-08-16'
   },
+
+  // 10. Sephora
   {
-    id: 'coup-bestbuy-01',
-    storeId: 'store-bestbuy',
-    storeName: 'Best Buy',
-    storeSlug: 'best-buy',
-    storeLogo: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=150&h=150&fit=crop&auto=format',
-    title: '$50 Off Laptops, Tablets & Tech Gear over $300',
-    description: 'Use promo code for instant $50 discount on qualified laptop and PC orders.',
-    code: 'BBY50OFF',
-    discount: '$50 OFF',
+    id: 'coup-sephora-01',
+    storeId: 'store-sephora',
+    storeName: 'Sephora',
+    storeSlug: 'sephora',
+    storeLogo: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&h=150&fit=crop&auto=format',
+    title: 'Free 8-Piece Luxury Beauty Trial Set with $45 Order',
+    description: 'Receive a complimentary sample bag filled with mini luxury skincare and fragrance favorites.',
+    code: 'LUXEBAG',
+    discount: 'FREE GIFT',
     discountType: 'fixed',
     type: 'coupon',
-    category: 'Electronics & Tech',
-    categorySlug: 'electronics',
+    category: 'Beauty & Skincare',
+    categorySlug: 'beauty',
     verified: true,
     verifiedDate: 'Today',
-    expirationDate: '2026-09-15',
-    terms: 'My Best Buy members exclusive code.',
-    affiliateUrl: 'https://bestbuy.com?aff=dealzios&code=BBY50OFF',
-    merchantUrl: 'https://bestbuy.com',
-    clickCount: 2310,
-    upvotes: 680,
-    downvotes: 14,
+    expirationDate: '2026-08-28',
+    terms: 'Beauty Insider membership required. Minimum spend $45.',
+    affiliateUrl: 'https://sephora.com?aff=dealzios&code=LUXEBAG',
+    merchantUrl: 'https://sephora.com',
+    clickCount: 1540,
+    upvotes: 430,
+    downvotes: 11,
     featured: true,
-    trending: true,
-    createdAt: '2026-08-02',
-    updatedAt: '2026-08-16'
+    trending: false,
+    createdAt: '2026-08-07',
+    updatedAt: '2026-08-15'
   },
+
+  // 11. Samsung
   {
     id: 'coup-samsung-01',
     storeId: 'store-samsung',
@@ -426,6 +391,98 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-04',
     updatedAt: '2026-08-13'
   },
+
+  // 12. Best Buy
+  {
+    id: 'coup-bestbuy-01',
+    storeId: 'store-bestbuy',
+    storeName: 'Best Buy',
+    storeSlug: 'best-buy',
+    storeLogo: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=150&h=150&fit=crop&auto=format',
+    title: '$50 Off Laptops, Tablets & Tech Gear over $300',
+    description: 'Use promo code for instant $50 discount on qualified laptop and PC orders.',
+    code: 'BBY50OFF',
+    discount: '$50 OFF',
+    discountType: 'fixed',
+    type: 'coupon',
+    category: 'Electronics & Tech',
+    categorySlug: 'electronics',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-15',
+    terms: 'My Best Buy members exclusive code.',
+    affiliateUrl: 'https://bestbuy.com?aff=dealzios&code=BBY50OFF',
+    merchantUrl: 'https://bestbuy.com',
+    clickCount: 2310,
+    upvotes: 680,
+    downvotes: 14,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-02',
+    updatedAt: '2026-08-16'
+  },
+
+  // 13. Apple
+  {
+    id: 'coup-apple-01',
+    storeId: 'store-apple',
+    storeName: 'Apple',
+    storeSlug: 'apple',
+    storeLogo: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=150&h=150&fit=crop&auto=format',
+    title: '10% Student & Educator Discount on Mac & iPad',
+    description: 'Verified students and educators receive 10% off MacBook Air, Pro, and iPad models.',
+    code: 'APPLESTUDENT10',
+    discount: '10% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Electronics & Tech',
+    categorySlug: 'electronics',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-10-31',
+    terms: 'Requires UNiDAYS or educational verification.',
+    affiliateUrl: 'https://apple.com?aff=dealzios&code=APPLESTUDENT10',
+    merchantUrl: 'https://apple.com',
+    clickCount: 3410,
+    upvotes: 980,
+    downvotes: 16,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-01',
+    updatedAt: '2026-08-16'
+  },
+
+  // 14. eBay
+  {
+    id: 'coup-ebay-01',
+    storeId: 'store-ebay',
+    storeName: 'eBay',
+    storeSlug: 'ebay',
+    storeLogo: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=150&h=150&fit=crop&auto=format',
+    title: '20% Off Certified Refurbished Electronics & Appliances',
+    description: 'Save 20% on top refurbished brands including Apple, Bose, and Dyson on eBay.',
+    code: 'EBAYREFURB20',
+    discount: '20% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Department Stores & Retail',
+    categorySlug: 'shopping',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-05',
+    terms: 'Max discount $50 on certified refurbished items.',
+    affiliateUrl: 'https://ebay.com?aff=dealzios&code=EBAYREFURB20',
+    merchantUrl: 'https://ebay.com',
+    clickCount: 2190,
+    upvotes: 620,
+    downvotes: 11,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-03',
+    updatedAt: '2026-08-16'
+  },
+
+  // 15. Dell
   {
     id: 'coup-dell-01',
     storeId: 'store-dell',
@@ -454,6 +511,98 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-06',
     updatedAt: '2026-08-15'
   },
+
+  // 16. ASOS
+  {
+    id: 'coup-asos-01',
+    storeId: 'store-asos',
+    storeName: 'ASOS',
+    storeSlug: 'asos',
+    storeLogo: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=150&h=150&fit=crop&auto=format',
+    title: '20% Off Your First Order over $50',
+    description: 'New ASOS customers get 20% off apparel, shoes, and street style outfits.',
+    code: 'ASOSNEW20',
+    discount: '20% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Fashion & Apparel',
+    categorySlug: 'fashion',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-01',
+    terms: 'Valid for first-time purchases.',
+    affiliateUrl: 'https://asos.com?aff=dealzios&code=ASOSNEW20',
+    merchantUrl: 'https://asos.com',
+    clickCount: 1650,
+    upvotes: 450,
+    downvotes: 9,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-04',
+    updatedAt: '2026-08-16'
+  },
+
+  // 17. Expedia
+  {
+    id: 'coup-expedia-01',
+    storeId: 'store-expedia',
+    storeName: 'Expedia',
+    storeSlug: 'expedia',
+    storeLogo: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=150&h=150&fit=crop&auto=format',
+    title: '10% Off Hotel Bookings in the Expedia App',
+    description: 'Book your hotel stay in the Expedia mobile app to unlock an extra 10% discount.',
+    code: 'EXPEDIAAPP10',
+    discount: '10% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Travel & Hotels',
+    categorySlug: 'travel',
+    verified: true,
+    verifiedDate: 'Yesterday',
+    expirationDate: '2026-09-20',
+    terms: 'App exclusive coupon code.',
+    affiliateUrl: 'https://expedia.com?aff=dealzios&code=EXPEDIAAPP10',
+    merchantUrl: 'https://expedia.com',
+    clickCount: 1280,
+    upvotes: 340,
+    downvotes: 10,
+    featured: true,
+    trending: false,
+    createdAt: '2026-08-05',
+    updatedAt: '2026-08-15'
+  },
+
+  // 18. Hostinger
+  {
+    id: 'coup-hostinger-01',
+    storeId: 'store-hostinger',
+    storeName: 'Hostinger',
+    storeSlug: 'hostinger',
+    storeLogo: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=150&h=150&fit=crop&auto=format',
+    title: 'Extra 10% Off Premium Web Hosting Plans',
+    description: 'Get an additional 10% off already discounted hosting packages + free domain name.',
+    code: 'HOSTING10PRO',
+    discount: '10% EXTRA',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Software & SaaS',
+    categorySlug: 'software',
+    verified: true,
+    verifiedDate: '3 days ago',
+    expirationDate: '2026-10-01',
+    terms: 'Valid on 12, 24, and 48-month billing cycles.',
+    affiliateUrl: 'https://hostinger.com?aff=dealzios&code=HOSTING10PRO',
+    merchantUrl: 'https://hostinger.com',
+    clickCount: 940,
+    upvotes: 280,
+    downvotes: 6,
+    featured: true,
+    trending: false,
+    createdAt: '2026-08-03',
+    updatedAt: '2026-08-12'
+  },
+
+  // 19. Udemy
   {
     id: 'coup-udemy-01',
     storeId: 'store-udemy',
@@ -482,6 +631,38 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
+
+  // 20. NordPass
+  {
+    id: 'coup-nordpass-01',
+    storeId: 'store-nordpass',
+    storeName: 'NordPass',
+    storeSlug: 'nordpass',
+    storeLogo: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=150&h=150&fit=crop&auto=format',
+    title: '56% Off NordPass Premium 2-Year Password Plan',
+    description: 'Safely store passwords, autosave credit cards, and detect data breaches.',
+    code: 'NORDPASS56',
+    discount: '56% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Subscriptions & VPNs',
+    categorySlug: 'subscriptions',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-30',
+    terms: '2-year plan discount for new users.',
+    affiliateUrl: 'https://nordpass.com?aff=dealzios&code=NORDPASS56',
+    merchantUrl: 'https://nordpass.com',
+    clickCount: 910,
+    upvotes: 270,
+    downvotes: 5,
+    featured: true,
+    trending: false,
+    createdAt: '2026-08-02',
+    updatedAt: '2026-08-16'
+  },
+
+  // 21. Grammarly
   {
     id: 'coup-grammarly-01',
     storeId: 'store-grammarly',
@@ -510,6 +691,8 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-05',
     updatedAt: '2026-08-14'
   },
+
+  // 22. Squarespace
   {
     id: 'coup-squarespace-01',
     storeId: 'store-squarespace',
@@ -538,34 +721,68 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
+
+  // 23. Webflow
   {
-    id: 'coup-puma-01',
-    storeId: 'store-puma',
-    storeName: 'Puma',
-    storeSlug: 'puma',
-    storeLogo: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=150&h=150&fit=crop&auto=format',
-    title: '20% Off Sitewide + Free Shipping',
-    description: 'Get 20% off running shoes, soccer boots, and lifestyle apparel.',
-    code: 'PUMA20WELCOME',
+    id: 'coup-webflow-01',
+    storeId: 'store-webflow',
+    storeName: 'Webflow',
+    storeSlug: 'webflow',
+    storeLogo: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=150&h=150&fit=crop&auto=format',
+    title: '20% Off Annual CMS & Workspace Hosting Plans',
+    description: 'Design responsive, custom-coded web experiences with 20% off annual workspace subscriptions.',
+    code: 'WEBFLOW20',
     discount: '20% OFF',
     discountType: 'percent',
     type: 'coupon',
-    category: 'Fashion & Apparel',
-    categorySlug: 'fashion',
+    category: 'Software & SaaS',
+    categorySlug: 'software',
     verified: true,
     verifiedDate: 'Today',
-    expirationDate: '2026-08-29',
-    terms: 'Valid for email subscribers.',
-    affiliateUrl: 'https://puma.com?aff=dealzios&code=PUMA20WELCOME',
-    merchantUrl: 'https://puma.com',
-    clickCount: 780,
-    upvotes: 195,
-    downvotes: 7,
-    featured: false,
+    expirationDate: '2026-09-30',
+    terms: 'Valid on annual workspace plan checkout.',
+    affiliateUrl: 'https://webflow.com?aff=dealzios&code=WEBFLOW20',
+    merchantUrl: 'https://webflow.com',
+    clickCount: 820,
+    upvotes: 240,
+    downvotes: 4,
+    featured: true,
     trending: false,
-    createdAt: '2026-08-07',
-    updatedAt: '2026-08-15'
+    createdAt: '2026-08-03',
+    updatedAt: '2026-08-16'
   },
+
+  // 24. Coursera
+  {
+    id: 'coup-coursera-01',
+    storeId: 'store-coursera',
+    storeName: 'Coursera',
+    storeSlug: 'coursera',
+    storeLogo: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=150&h=150&fit=crop&auto=format',
+    title: '$200 Off Coursera Plus Annual Learning Subscription',
+    description: 'Get unlimited access to 7,000+ online courses, Google certificates, and university specializations.',
+    code: 'COURSERA200',
+    discount: '$200 OFF',
+    discountType: 'fixed',
+    type: 'coupon',
+    category: 'Education & Courses',
+    categorySlug: 'education',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-15',
+    terms: 'Valid for new Coursera Plus annual subscribers.',
+    affiliateUrl: 'https://coursera.org?aff=dealzios&code=COURSERA200',
+    merchantUrl: 'https://coursera.org',
+    clickCount: 1750,
+    upvotes: 510,
+    downvotes: 12,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-02',
+    updatedAt: '2026-08-16'
+  },
+
+  // 25. Namecheap
   {
     id: 'coup-namecheap-01',
     storeId: 'store-namecheap',
@@ -594,6 +811,128 @@ export const COUPONS: Offer[] = [
     createdAt: '2026-08-01',
     updatedAt: '2026-08-15'
   },
+
+  // 26. Adidas
+  {
+    id: 'coup-adidas-01',
+    storeId: 'store-adidas',
+    storeName: 'Adidas',
+    storeSlug: 'adidas',
+    storeLogo: 'https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=150&h=150&fit=crop&auto=format',
+    title: '30% Off Ultraboost & Originals Collection',
+    description: 'Save 30% on iconic Adidas footwear and tracksuit apparel.',
+    code: 'ADI30SUMMER',
+    discount: '30% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Fashion & Apparel',
+    categorySlug: 'fashion',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-08-31',
+    terms: 'adiClub membership required for coupon redemption.',
+    affiliateUrl: 'https://adidas.com?aff=dealzios&code=ADI30SUMMER',
+    merchantUrl: 'https://adidas.com',
+    clickCount: 1680,
+    upvotes: 490,
+    downvotes: 14,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-01',
+    updatedAt: '2026-08-15'
+  },
+
+  // 27. Puma
+  {
+    id: 'coup-puma-01',
+    storeId: 'store-puma',
+    storeName: 'Puma',
+    storeSlug: 'puma',
+    storeLogo: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=150&h=150&fit=crop&auto=format',
+    title: '20% Off Sitewide + Free Shipping',
+    description: 'Get 20% off running shoes, soccer boots, and lifestyle apparel.',
+    code: 'PUMA20WELCOME',
+    discount: '20% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Fashion & Apparel',
+    categorySlug: 'fashion',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-08-29',
+    terms: 'Valid for email subscribers.',
+    affiliateUrl: 'https://puma.com?aff=dealzios&code=PUMA20WELCOME',
+    merchantUrl: 'https://puma.com',
+    clickCount: 780,
+    upvotes: 195,
+    downvotes: 7,
+    featured: false,
+    trending: false,
+    createdAt: '2026-08-07',
+    updatedAt: '2026-08-15'
+  },
+
+  // 28. Lululemon
+  {
+    id: 'coup-lululemon-01',
+    storeId: 'store-lululemon',
+    storeName: 'Lululemon',
+    storeSlug: 'lululemon',
+    storeLogo: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=150&h=150&fit=crop&auto=format',
+    title: '15% Off Align Leggings & Activewear Orders',
+    description: 'Take 15% off premium Align yoga pants, Scuba hoodies, and training apparel.',
+    code: 'ALIGN15',
+    discount: '15% OFF',
+    discountType: 'percent',
+    type: 'coupon',
+    category: 'Fashion & Apparel',
+    categorySlug: 'fashion',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-10',
+    terms: 'Valid on first purchase after free membership signup.',
+    affiliateUrl: 'https://lululemon.com?aff=dealzios&code=ALIGN15',
+    merchantUrl: 'https://lululemon.com',
+    clickCount: 1920,
+    upvotes: 540,
+    downvotes: 11,
+    featured: true,
+    trending: true,
+    createdAt: '2026-08-02',
+    updatedAt: '2026-08-16'
+  },
+
+  // 29. Ray-Ban
+  {
+    id: 'coup-rayban-01',
+    storeId: 'store-rayban',
+    storeName: 'Ray-Ban',
+    storeSlug: 'ray-ban',
+    storeLogo: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=150&h=150&fit=crop&auto=format',
+    title: '$50 Off Prescription Eyeglasses & Polarized Sunglasses',
+    description: 'Save $50 on custom Wayfarer, Aviator, and Clubmaster frames with prescription lenses.',
+    code: 'RAYBAN50',
+    discount: '$50 OFF',
+    discountType: 'fixed',
+    type: 'coupon',
+    category: 'Fashion & Apparel',
+    categorySlug: 'fashion',
+    verified: true,
+    verifiedDate: 'Today',
+    expirationDate: '2026-09-25',
+    terms: 'Valid on complete pairs of prescription glasses.',
+    affiliateUrl: 'https://ray-ban.com?aff=dealzios&code=RAYBAN50',
+    merchantUrl: 'https://ray-ban.com',
+    clickCount: 1150,
+    upvotes: 320,
+    downvotes: 8,
+    featured: true,
+    trending: false,
+    createdAt: '2026-08-05',
+    updatedAt: '2026-08-16'
+  },
+
+  // 30. Dyson
   {
     id: 'coup-dyson-01',
     storeId: 'store-dyson',
