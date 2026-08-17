@@ -153,15 +153,10 @@ export default function StorePage({ params }: StorePageProps) {
                   {store.rating} ({store.reviewCount.toLocaleString()} ratings)
                 </span>
                 <span>•</span>
-                <a
-                  href={store.affiliateUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-indigo-600 font-semibold hover:underline flex items-center gap-1"
-                >
-                  <span>Visit {store.name} Website</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <span className="text-slate-500 font-medium flex items-center gap-1">
+                  <Tag className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>{store.offerCount} Active Coupon Codes</span>
+                </span>
               </div>
             </div>
           </div>
