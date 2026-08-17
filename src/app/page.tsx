@@ -251,10 +251,11 @@ export default function HomePage() {
               {heroQuery.trim().length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-3xl border border-slate-200 shadow-2xl p-4 z-40 text-left space-y-3 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider px-2">
-                    Matching Stores & Offers
+                    Matching Stores & Coupon Codes
                   </div>
-                  <div className="space-y-1.5 max-h-60 overflow-y-auto">
-                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase())).slice(0, 4).map(store => (
+                  <div className="space-y-1.5 max-h-64 overflow-y-auto">
+                    {/* Matching Stores */}
+                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase()) || s.slug.toLowerCase().includes(heroQuery.toLowerCase())).slice(0, 3).map(store => (
                       <Link
                         key={store.id}
                         href={`/store/${store.slug}`}
@@ -264,7 +265,7 @@ export default function HomePage() {
                           <img src={store.logo} alt={store.name} className="w-8 h-8 rounded-lg object-cover border border-slate-200" />
                           <div>
                             <div className="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-indigo-600">{store.name}</div>
-                            <div className="text-[11px] text-slate-500">{store.offerCount} Offers</div>
+                            <div className="text-[11px] text-slate-500">{store.offerCount} Offers Available</div>
                           </div>
                         </div>
                         <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
@@ -272,7 +273,33 @@ export default function HomePage() {
                         </span>
                       </Link>
                     ))}
-                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase())).length === 0 && (
+
+                    {/* Matching Coupon Codes */}
+                    {[...COUPONS, ...DEALS].filter(c => 
+                      c.storeName.toLowerCase().includes(heroQuery.toLowerCase()) ||
+                      c.title.toLowerCase().includes(heroQuery.toLowerCase()) ||
+                      (c.code ? c.code.toLowerCase().includes(heroQuery.toLowerCase()) : false)
+                    ).slice(0, 3).map(offer => (
+                      <div
+                        key={offer.id}
+                        onClick={() => setSelectedCoupon(offer)}
+                        className="flex items-center justify-between p-2.5 rounded-2xl hover:bg-indigo-50/60 transition-colors cursor-pointer group"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <img src={offer.storeLogo} alt={offer.storeName} className="w-8 h-8 rounded-lg object-cover border border-slate-200 shrink-0" />
+                          <div className="min-w-0">
+                            <div className="font-bold text-slate-900 text-xs truncate group-hover:text-indigo-600">{offer.title}</div>
+                            <div className="text-[11px] text-indigo-600 font-mono font-bold">{offer.code}</div>
+                          </div>
+                        </div>
+                        <span className="text-[11px] font-extrabold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md shrink-0">
+                          Show Code
+                        </span>
+                      </div>
+                    ))}
+
+                    {STORES.filter(s => s.name.toLowerCase().includes(heroQuery.toLowerCase())).length === 0 && 
+                     [...COUPONS, ...DEALS].filter(c => c.storeName.toLowerCase().includes(heroQuery.toLowerCase()) || c.title.toLowerCase().includes(heroQuery.toLowerCase()) || c.code?.toLowerCase().includes(heroQuery.toLowerCase())).length === 0 && (
                       <div className="p-3 text-xs text-slate-500 text-center">
                         Press Enter to view all results for "{heroQuery}"
                       </div>

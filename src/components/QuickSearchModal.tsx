@@ -49,20 +49,32 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
 
   const cleanQuery = query.trim().toLowerCase();
 
+  const matchesOffer = (offer: Offer) => {
+    if (!cleanQuery) return true;
+    return (
+      offer.storeName.toLowerCase().includes(cleanQuery) ||
+      offer.storeSlug.toLowerCase().includes(cleanQuery) ||
+      offer.title.toLowerCase().includes(cleanQuery) ||
+      offer.description.toLowerCase().includes(cleanQuery) ||
+      (offer.code ? offer.code.toLowerCase().includes(cleanQuery) : false) ||
+      (offer.discount ? offer.discount.toLowerCase().includes(cleanQuery) : false)
+    );
+  };
+
   const matchedStores = cleanQuery
-    ? STORES.filter(s => s.name.toLowerCase().includes(cleanQuery) || s.category.toLowerCase().includes(cleanQuery)).slice(0, 6)
+    ? STORES.filter(s => s.name.toLowerCase().includes(cleanQuery) || s.category.toLowerCase().includes(cleanQuery) || s.slug.toLowerCase().includes(cleanQuery)).slice(0, 6)
     : STORES.filter(s => s.trending).slice(0, 4);
 
   const matchedCoupons = cleanQuery
-    ? COUPONS.filter(c => c.storeName.toLowerCase().includes(cleanQuery) || c.title.toLowerCase().includes(cleanQuery) || c.code?.toLowerCase().includes(cleanQuery)).slice(0, 5)
+    ? COUPONS.filter(matchesOffer).slice(0, 6)
     : COUPONS.slice(0, 3);
 
   const matchedDeals = cleanQuery
-    ? DEALS.filter(d => d.storeName.toLowerCase().includes(cleanQuery) || d.title.toLowerCase().includes(cleanQuery)).slice(0, 4)
+    ? DEALS.filter(matchesOffer).slice(0, 6)
     : DEALS.slice(0, 2);
 
   const matchedCategories = cleanQuery
-    ? CATEGORIES.filter(c => c.name.toLowerCase().includes(cleanQuery)).slice(0, 4)
+    ? CATEGORIES.filter(c => c.name.toLowerCase().includes(cleanQuery) || c.slug.toLowerCase().includes(cleanQuery)).slice(0, 4)
     : CATEGORIES.filter(c => c.featured).slice(0, 4);
 
   const handleSearchSubmit = (e: React.FormEvent) => {

@@ -30,7 +30,6 @@ function SearchResultsContent() {
   }, [query]);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isSubmitOpen, setIsSubmitOpen] = useState(false);
   const [isSavedOpen, setIsSavedOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<Offer | null>(null);
@@ -45,7 +44,7 @@ function SearchResultsContent() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('vv_saved_coupons');
+      const stored = localStorage.getItem('dealzios_saved_coupons');
       if (stored) setSavedIds(JSON.parse(stored));
     } catch (e) {}
   }, []);
@@ -56,26 +55,47 @@ function SearchResultsContent() {
       : [...savedIds, couponId];
     setSavedIds(updated);
     try {
-      localStorage.setItem('vv_saved_coupons', JSON.stringify(updated));
+      localStorage.setItem('dealzios_saved_coupons', JSON.stringify(updated));
     } catch (e) {}
   };
 
   const cleanQ = query.trim().toLowerCase();
 
-  const matchedStores = cleanQ
-    ? STORES.filter(s => s.name.toLowerCase().includes(cleanQ) || s.category.toLowerCase().includes(cleanQ))
-    : [];
+  // Helper matching function for offers (Coupons & Deals)
+  const matchesOffer = (offer: Offer, term: string) => {
+    if (!term) return false;
+    return (
+      offer.storeName.toLowerCase().includes(term) ||
+      offer.storeSlug.toLowerCase().includes(term) ||
+      offer.title.toLowerCase().includes(term) ||
+      offer.description.toLowerCase().includes(term) ||
+      offer.category.toLowerCase().includes(term) ||
+      offer.categorySlug.toLowerCase().includes(term) ||
+      (offer.code ? offer.code.toLowerCase().includes(term) : false) ||
+      (offer.discount ? offer.discount.toLowerCase().includes(term) : false)
+    );
+  };
 
   const matchedCoupons = cleanQ
-    ? COUPONS.filter(c => c.storeName.toLowerCase().includes(cleanQ) || c.title.toLowerCase().includes(cleanQ) || c.code?.toLowerCase().includes(cleanQ))
+    ? COUPONS.filter(c => matchesOffer(c, cleanQ))
     : [];
 
   const matchedDeals = cleanQ
-    ? DEALS.filter(d => d.storeName.toLowerCase().includes(cleanQ) || d.title.toLowerCase().includes(cleanQ))
+    ? DEALS.filter(d => matchesOffer(d, cleanQ))
+    : [];
+
+  const matchedStores = cleanQ
+    ? STORES.filter(s => 
+        s.name.toLowerCase().includes(cleanQ) || 
+        s.slug.toLowerCase().includes(cleanQ) || 
+        s.category.toLowerCase().includes(cleanQ) ||
+        matchedCoupons.some(c => c.storeId === s.id) ||
+        matchedDeals.some(d => d.storeId === s.id)
+      )
     : [];
 
   const matchedCategories = cleanQ
-    ? CATEGORIES.filter(c => c.name.toLowerCase().includes(cleanQ))
+    ? CATEGORIES.filter(c => c.name.toLowerCase().includes(cleanQ) || c.slug.toLowerCase().includes(cleanQ))
     : [];
 
   const totalResults = matchedStores.length + matchedCoupons.length + matchedDeals.length + matchedCategories.length;
@@ -113,7 +133,7 @@ function SearchResultsContent() {
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Refine your search..."
+                placeholder="Search coupon code, store or brand..."
                 className="w-full bg-transparent text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 outline-none font-semibold py-1.5"
               />
               <button
@@ -133,11 +153,11 @@ function SearchResultsContent() {
             </div>
             <h3 className="font-bold text-lg text-slate-900">No offers found for "{query}"</h3>
             <p className="text-xs text-slate-500">
-              Try checking your spelling or searching for popular store names like Nike, Canva, or Adobe.
+              Try checking your spelling or searching for popular store names like Nike, Walmart, Canva, or Amazon.
             </p>
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="px-5 py-2.5 bg-indigo-600 text-white font-bold text-xs rounded-xl"
+              className="px-5 py-2.5 bg-indigo-600 text-white font-bold text-xs rounded-xl hover:bg-indigo-500 transition-colors shadow-sm"
             >
               Open Search Bar
             </button>
@@ -145,24 +165,7 @@ function SearchResultsContent() {
         ) : (
           <div className="space-y-10">
             
-            {/* Matching Stores */}
-            {matchedStores.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <StoreIcon className="w-5 h-5 text-indigo-600" />
-                  <h2 className="text-xl font-extrabold text-slate-950">
-                    Matching Stores ({matchedStores.length})
-                  </h2>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {matchedStores.map(store => (
-                    <StoreCard key={store.id} store={store} />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Matching Coupons */}
+            {/* Matching Coupon Codes */}
             {matchedCoupons.length > 0 && (
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -191,7 +194,7 @@ function SearchResultsContent() {
                 <div className="flex items-center gap-2 mb-4">
                   <Percent className="w-5 h-5 text-emerald-600" />
                   <h2 className="text-xl font-extrabold text-slate-950">
-                    Matching Deals ({matchedDeals.length})
+                    Matching Special Offers & Deals ({matchedDeals.length})
                   </h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -203,6 +206,23 @@ function SearchResultsContent() {
                       isSaved={savedIds.includes(deal.id)}
                       onToggleSave={handleToggleSave}
                     />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Matching Stores */}
+            {matchedStores.length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <StoreIcon className="w-5 h-5 text-indigo-600" />
+                  <h2 className="text-xl font-extrabold text-slate-950">
+                    Matching Stores ({matchedStores.length})
+                  </h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {matchedStores.map(store => (
+                    <StoreCard key={store.id} store={store} />
                   ))}
                 </div>
               </div>
